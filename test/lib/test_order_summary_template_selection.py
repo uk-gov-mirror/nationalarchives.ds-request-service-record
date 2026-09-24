@@ -42,6 +42,34 @@ class TestGetOrderSummaryTemplateVariant:
         result = get_order_summary_template_variant(order_data)
         assert result == "your-order-summary-full-record-check-digital"
 
+    def test_army_officer_full_record_check_digital_combination(self):
+        """Should return army-officer-full-record-check-digital template for army officer processing + digital delivery"""
+        order_data = {
+            "service_branch": "BRITISH_ARMY",
+            "were_they_a_commissioned_officer": "yes",
+            "processing_option": "full",
+            "delivery_type": "Digital",
+        }
+        result = get_order_summary_template_variant(order_data)
+        assert (
+            result
+            == "your-order-summary-full-record-check-british-army-officer-digital"
+        )
+
+    def test_army_officer_full_record_check_printed_combination(self):
+        """Should return army-officer-full-record-check-printed template for army officer processing + printed delivery"""
+        order_data = {
+            "service_branch": "BRITISH_ARMY",
+            "were_they_a_commissioned_officer": "yes",
+            "processing_option": "full",
+            "delivery_type": "PrintedTracked",
+        }
+        result = get_order_summary_template_variant(order_data)
+        assert (
+            result
+            == "your-order-summary-full-record-check-british-army-officer-printed"
+        )
+
     def test_invalid_processing_option(self):
         """Should raise ValueError for invalid processing_option"""
         order_data = {
